@@ -49,7 +49,7 @@ I am listing them below.
 
 The creation of a status bar notification is very simple.
 
-```
+```kotlin
 NotificationCompat.Builder(this, channelId)
 .setSmallIcon(R.drawable.ic_launcher_background)
 .setContentTitle("My notification")
@@ -67,7 +67,7 @@ and this argument specifies the action that need to be performed upon opening th
 
 ## Create PendingIntent
 
-```
+```kotlin
 private fun createPendingIntent(): PendingIntent {
     val intent = Intent(this, AlertActivity::class.java)
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -80,7 +80,7 @@ private fun createPendingIntent(): PendingIntent {
 If we are ready with the notification compat builder, we are good to launch the notification.
 For that get the `NotificationManager` from the system services and call the `notify` method upon that instance.
 
-```
+```kotlin
 val builder = this.createNotificationBuilder()
 val notificationManager: NotificationManager =
     getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -93,10 +93,10 @@ We are done with the implementation of the notification except one thing that cr
 
 ## Create NotificationChannel
 
-Creation of the notification service is necessary for only *API level* greater than *26* which means greater than *Android 8*
-This creation should be done earlier as possible. *onCreate* would be the right place to do it.
+Creation of the notification service is necessary for only **API level** greater than **26** which means greater than *Android 8*
+This creation should be done earlier as possible. **onCreate** would be the right place to do it.
 
-```
+```kotlin
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
     val importance = NotificationManager.IMPORTANCE_DEFAULT
     val channel =
@@ -117,7 +117,7 @@ we can override this class according to our convenience an usage. Which are `onN
 
 In order to use this service the app need to get some permission. which we can specify in `AndroidManifest.xml` under `application` tag.
 
-```
+```xml
 <service
     android:name="com.example.notification.notificationservice.NLService"
     android:enabled="true"
